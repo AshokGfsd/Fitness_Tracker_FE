@@ -1,0 +1,31 @@
+.layout {
+  display: flex;
+}
+.sidebar {
+  min-height: 100vh;
+  background-color: var(--secondary-color);
+  
+  flex-basis: 20%;
+  min-width: 5rem;
+}
+.page {
+  margin-top: 30px;
+  padding-inline: 20px;
+  flex-basis: 80%;
+}
+
+@media (max-width: 500px) {
+  .sidebar {
+    min-height: fit-content;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 99999;
+  }
+  .page {
+    display: flex;
+    justify-content: center;
+    flex-basis: 100%;
+  }
+}

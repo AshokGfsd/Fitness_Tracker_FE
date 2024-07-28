@@ -1,0 +1,23 @@
+.div1 {
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+  bottom: 40px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 25px;
+}
+
+.suggCard__delete {
+  font-size: x-large;
+  background-color: rgba(240, 248, 255, 0.555);
+  color: red;
+  cursor: pointer;
+}
+
+.add_pin_s {
+  color: rgba(0, 0, 255, 0.651);
+  background-color: rgba(240, 248, 255, 0.555);
+  font-size: xx-large;
+  cursor: pointer;
+}

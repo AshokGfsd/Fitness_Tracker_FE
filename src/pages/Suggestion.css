@@ -1,0 +1,30 @@
+.suggestions {
+  width: 100%;
+  padding-bottom: 100px;
+}
+
+.suggestions__container {
+  display: grid;
+  align-content: start;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 20px;
+}
+
+.suggestions button {
+  position: fixed;
+  bottom: 100px;
+  right: 50px;
+  width: 50px;
+  height: 50px;
+  font-size: large !important;
+  border-radius: 99999px;
+  border: none;
+  background-color: var(--accent-color);
+  color: var(--primary-text-color);
+  box-shadow: 4px 4px 7px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+
+.suggestions button:hover {
+  background-color: var(--secondary-text-color);
+}

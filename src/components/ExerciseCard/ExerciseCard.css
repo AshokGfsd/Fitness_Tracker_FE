@@ -1,0 +1,42 @@
+.exerciseCard {
+  position: relative;
+  min-height: 120px;
+  padding: 20px;
+  background-color: var(--secondary-color);
+  color: var(--primary-color);
+  overflow: hidden;
+  border-radius: 6px;
+  z-index: 0;
+}
+.exerciseCard > h4 {
+  margin: 0;
+  margin-bottom: 4px;
+  font-weight: var(--fw-medium);
+}
+.exerciseCard > p {
+  margin-block: 2px;
+  color: var(--secondary-text-color);
+  font-weight: var(--fw-light);
+  font-size: smaller;
+}
+.exerciseCard > img {
+  position: absolute;
+  object-fit: cover;
+  height: 80%;
+  bottom: 0;
+  right: 0;
+  transform: translate(20%, 0%) rotate(20deg);
+  border-radius: 12px;
+  z-index: -1;
+}
+.exerciseCard__delete {
+  position: absolute;
+  bottom: 10px;
+  cursor: pointer;
+  font-size: x-large;
+  background-color: rgba(240, 248, 255, 0.555);
+  color: red;
+}
+.exerciseCard__delete:hover {
+  color: var(--accent-color);
+}
