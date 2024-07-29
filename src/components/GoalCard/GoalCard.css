@@ -7,22 +7,27 @@
   overflow: hidden;
   border-radius: 6px;
   z-index: 0;
+  
 }
-.goalCard > h4 {
+
+.goalCard>h4 {
   margin: 0;
   margin-bottom: 4px;
   font-weight: var(--fw-medium);
 }
-.goalCard > p {
+
+.goalCard>p {
   margin-block: 2px;
   color: var(--secondary-text-color);
   font-weight: var(--fw-light);
   font-size: smaller;
 }
-.goalCard > p:not(:first-of-type){
+
+.goalCard>p:not(:first-of-type) {
   font-size: x-small;
 }
-.goalCard > img {
+
+.goalCard>img {
   position: absolute;
   object-fit: cover;
   height: 80%;
@@ -32,25 +37,36 @@
   border-radius: 12px;
   z-index: 1;
 }
+
 .goalCard__delete:hover {
   color: var(--accent-color);
 }
+
 .goalCard__delete {
   position: absolute;
   font-size: x-large;
   background-color: rgba(240, 248, 255, 0.555);
-  color: red;
+  color: rgb(173, 103, 103);
   bottom: 10px;
   cursor: pointer;
   z-index: 992;
 }
+
 .add_pin {
   position: absolute;
-  bottom: 10px;
-  right: 10px;
-  color: rgba(0, 0, 255, 0.651);
-  background-color: rgba(240, 248, 255, 0.555);
-  font-size: xx-large;
+  bottom: 3px;
+  left: 50px;
+  color: rgb(66, 66, 231);
+  font-size: 20px;
+  cursor: pointer;
+  z-index: 992;
+}
+.add_pin:hover {
+  position: absolute;
+  bottom: 3px;
+  left: 50px;
+  color: rgb(33, 33, 216);
+  font-size: 20px;
   cursor: pointer;
   z-index: 992;
 }

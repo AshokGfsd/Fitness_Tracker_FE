@@ -38,6 +38,41 @@ const Sidebar = () => {
           <span>User</span>
         </NavLink>
       </div>
+      {/* <div class="navigation">
+      <ul>
+        <li class="list active">
+          <a href="#">
+            <span class="icon">A</span>
+            <span class="text">Home</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#">
+            <span class="icon">A</span>
+            <span class="text">Profile</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#">
+            <span class="icon">A</span>
+            <span class="text">Mesaage</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#">
+            <span class="icon">A</span>
+            <span class="text">Profile</span>
+          </a>
+        </li>
+        <li class="list">
+          <a href="#">
+            <span class="icon">A</span>
+            <span class="text">Mesaage</span>
+          </a>
+        </li>
+        <div class="indicator"></div>
+      </ul>
+    </div> */}
     </nav>
   );
 };

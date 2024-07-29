@@ -26,7 +26,7 @@ const validate = (values) => {
   } else if (!password) {
     error.password = "*Required";
     error.state = true;
-  } else if (password.length <= 8) {
+  } else if (password.length <7) {
     error.password = "Password must contain min length 8";
     error.state = true;
   } else if (!uppercase.test(password)) {
@@ -59,6 +59,8 @@ const SignModal = () => {
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
+    gender: "male",
+    DOB: "2000-01-01",
     password: "",
     confirmPassword: "",
   });
@@ -88,9 +90,10 @@ const SignModal = () => {
       confirmPassword: "",
     });
     toast.loading("Registering with given details");
-    const { userName, email, password } = formData;
+    const { userName, email, gender, DOB, password } = formData;
+    console.log(formData);
     userServices
-      .register(userName, email, password)
+      .register({ userName, email, gender, DOB, password })
       .then((response) => {
         const message = response.data.message;
         toast.dismiss();
@@ -100,6 +103,7 @@ const SignModal = () => {
         }, 3000);
       })
       .catch((e) => {
+        console.log(e);
         const message = e.response.data.message;
         toast.dismiss();
         return toast.error(message);
@@ -107,6 +111,8 @@ const SignModal = () => {
     // setFormData({
     //   userName: "",
     //   email: "",
+    //   gender: "male",
+    //   DOB: "2000-01-01",
     //   password: "",
     //   confirmPassword: "",
     // });
@@ -118,7 +124,7 @@ const SignModal = () => {
       <Dialog.Portal>
         <Dialog.Overlay className="DialogOverlay" />
         <Dialog.Content className="DialogContent">
-          <Dialog.Title className="DialogTitle">Sing in</Dialog.Title>
+          <Dialog.Title className="DialogTitle">Sign in</Dialog.Title>
           <Dialog.Description className="DialogDescription"></Dialog.Description>
           <fieldset className="Fieldset">
             <label className="Label" htmlFor="userName">
@@ -139,6 +145,33 @@ const SignModal = () => {
               <div style={style}>{error.userName}</div>
             </fieldset>
           )}
+          <fieldset className="Fieldset">
+            <label className="Label" htmlFor="email">
+              Enter your Date of Birth
+            </label>
+            <input
+              className="Input"
+              type="date"
+              name="DOB"
+              value={formData.DOB}
+              onChange={(e) => formDataHandler(e)}
+            />
+          </fieldset>
+          <fieldset className="Fieldset">
+            <label className="Label" htmlFor="gender">
+              Gender
+            </label>
+            <select
+              className="Input"
+              name="gender"
+              value={formData.gender}
+              onChange={(e) => formDataHandler(e)}
+              style={{ backgroundColor: "rgb(31,33,37)" }}
+            >
+              <option value="male">male</option>
+              <option value="female">female</option>
+            </select>
+          </fieldset>
           <fieldset className="Fieldset">
             <label className="Label" htmlFor="email">
               Email

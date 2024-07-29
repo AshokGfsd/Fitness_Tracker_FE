@@ -7,6 +7,7 @@
   overflow: hidden;
   border-radius: 6px;
   z-index: 0;
+  box-shadow: 4px 4px 6px;
 }
 .exerciseCard > h4 {
   margin: 0;
@@ -31,11 +32,11 @@
 }
 .exerciseCard__delete {
   position: absolute;
-  bottom: 10px;
+  bottom: 5px;
   cursor: pointer;
-  font-size: x-large;
-  background-color: rgba(240, 248, 255, 0.555);
-  color: red;
+  font-size: large;
+  /* background-color: rgba(240, 248, 255, 0.555); */
+  color: rgb(173, 103, 103);
 }
 .exerciseCard__delete:hover {
   color: var(--accent-color);

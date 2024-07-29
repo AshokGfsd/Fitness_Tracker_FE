@@ -38,8 +38,9 @@
   bottom: 10px;
   cursor: pointer;
   font-size: x-large;
-  background-color: rgba(240, 248, 255, 0.555);
-  color: red;
+  /* background-color: rgba(240, 248, 255, 0.555); */
+  color: rgb(173, 103, 103);
+
 }
 
 .foodCard__delete:hover {

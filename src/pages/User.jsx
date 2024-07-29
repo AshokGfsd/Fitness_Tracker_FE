@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import "./Goals.css";
 import { selectUser, userActions } from "../features/user/userSlice";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import LogoutModal from "./../components/Modal/LogoutModel";
 import { profile } from "../services/loader";
@@ -42,22 +42,21 @@ const BMICheck = (BMI) => {
   return { color: "white" };
 };
 const User = () => {
-  const { profile: user } = useSelector(selectUser);
+  const { profile: user, log } = useSelector(selectUser);
   const [logout, setLogout] = useState(false);
   const [state, setState] = useState(false);
+  const [aim, setAim] = useState("");
   const dispatch = useDispatch();
-  const aim = BMICheck(user.BMI);
+  const navigate = useNavigate();
   useEffect(() => {
     profile(dispatch, userActions);
-    if (!user.age) {
-      setState(true);
-    }
-  }, [state]);
+  }, []);
   useEffect(() => {
-    if (user.age) {
-      toast.dismiss();
+    if (log) {
+      setAim(BMICheck(user.BMI[user.BMI.length - 1].value));
     }
-  }, [user]);
+  }, [log]);
+  console.log(user);
   return user.userName ? (
     <div className="">
       <h1>
@@ -69,41 +68,38 @@ const User = () => {
         Get more features You can also use this form for edit
       </div>
       <h1>User Details</h1>
-      <div>
-        <h2 style={{ display: "inline-block" }}>Age: </h2>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <h3 style={{ display: "inline-block" }}>{user.age} </h3>
-      </div>
-      <div>
-        <h2 style={{ display: "inline-block" }}>Height: </h2>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <h3 style={{ display: "inline-block" }}>{user.height} </h3>
-      </div>
-      <div>
-        <h2 style={{ display: "inline-block" }}>Weight: </h2>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <h3 style={{ display: "inline-block" }}>{user.weight} </h3>
-      </div>
-      <div>
-        <h2 style={{ display: "inline-block" }}>BMI: </h2>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <h3 style={{ display: "inline-block" }}>{user.BMI} </h3>
-      </div>
-      <div>
-        <h2 style={{ display: "inline-block" }}>STAGE: </h2>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <h3 style={{ display: "inline-block" }}>
-          <span style={{ backgroundColor: aim.color }}>
-            <RxAvatar />
-            {aim.Name}
-          </span>
-        </h3>
-      </div>
-      <div>
-        <h2 style={{ display: "inline-block" }}>AIM FOR YOU: </h2>
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-        <h3 style={{ display: "inline-block" }}>{aim.Goal} </h3>
-      </div>
+      <table cellPadding={7.5}>
+        <tr>
+          <td>Age</td>
+          <td>:</td>
+          <td>{user.age}</td>
+        </tr>
+        <tr>
+          <td>Height</td>
+          <td>:</td>
+          <td>{user.height[user.height.length - 1].value}</td>
+        </tr>
+        <tr>
+          <td>Weight</td>
+          <td>:</td>
+          <td>{user.weight[user.weight.length - 1].value}</td>
+        </tr>
+        <tr>
+          <td>BMI</td>
+          <td>:</td>
+          <td>{user.BMI[user.BMI.length - 1].value}</td>
+        </tr>
+        <tr>
+          <td>STAGE</td>
+          <td>:</td>
+          <td>
+            <span style={{ backgroundColor: aim.color }}>
+              <RxAvatar />
+              {aim.Name}
+            </span>
+          </td>
+        </tr>
+      </table>
     </div>
   ) : (
     <div className="">

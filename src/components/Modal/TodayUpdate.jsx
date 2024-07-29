@@ -14,48 +14,35 @@ const validate = (values) => {
   let error = {
     state: false,
   };
-  if (!values.userName) {
-    error.userName = "userName is required";
-    error.state = true;
-  } else if (!values.weight) {
+  if (!values.weight) {
     error.weight = "Weight is required";
     error.state = true;
   } else if (!values.height) {
     error.height = "Height is required";
     error.state = true;
-  } else if (!values.gender) {
-    error.gender = "Gender is required";
-    error.state = true;
   }
   return error;
 };
 
-const UserModal = ({ state, setState }) => {
-  const { profile: user } = useSelector(selectUser);
+const TodayUpdateModal = ({ state, setState }) => {
+  const { profile: user, log } = useSelector(selectUser);
 
   const [error, setError] = useState({
-    userName: "",
-    gender: "",
     weight: "",
     height: "",
   });
   const [formData, setFormData] = useState({
-    userName: "",
-    DOB: "",
-    gender: "male",
     weight: "",
     height: "",
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    const { userName, DOB, gender, weight, height } = user;
-    setFormData({
-      userName,
-      DOB,
-      gender,
-      weight,
-      height,
-    });
+    if (log) {
+      setFormData({
+        height: user.height[user.height.length - 1].value,
+        weight: user.weight[user.height.length - 1].value,
+      });
+    }
   }, [user]);
   const style = {
     color: "red",
@@ -75,28 +62,26 @@ const UserModal = ({ state, setState }) => {
       return setError(error);
     }
     setError({
-      userName: "",
-      gender: "",
       weight: "",
       height: "",
     });
     toast.loading("Updating with given details");
-    const { DOB, gender, weight, height } = formData;
+    const { weight, height } = formData;
     const bmi = BMI(height, weight).toFixed(2);
     userServices
-      .update({ DOB, gender, weight, height, BMI: +bmi })
+      .todayUpdate({ weight, height, BMI: +bmi })
       .then((response) => {
-        const messDOB = response.data.messDOB;
+        const message = response.data.message;        
         toast.dismiss();
-        toast.success(messDOB);
+        toast.success(message);
         setState(false);
         profile(dispatch, userActions);
       })
       .catch((e) => {
-        console.log(e, "error");
-        const messDOB = e.response.data.messDOB;
+        console.log(e)
+        const message = e.response.data.message;
         toast.dismiss();
-        return toast.error(messDOB);
+        return toast.error(message);
       });
   };
 
@@ -113,38 +98,7 @@ const UserModal = ({ state, setState }) => {
             Enter Details for update
           </Dialog.Title>
           <Dialog.Description className="DialogDescription"></Dialog.Description>
-          <fieldset className="Fieldset">
-            <label className="Label" htmlFor="userName">
-              User Name
-            </label>
-            <input
-              className="Input"
-              name="userName"
-              value={formData.userName}
-              onChange={(e) => formDataHandler(e)}
-            />
-          </fieldset>
-          {error.userName && (
-            <fieldset className="Fieldset">
-              <label className="Label" htmlFor="confirmPassword">
-                Error
-              </label>
-              <div style={style}>{error.userName}</div>
-            </fieldset>
-          )}
-          <fieldset className="Fieldset">
-            <label className="Label" htmlFor="DOB">
-              DOB
-            </label>
-            <input
-              className="Input"
-              type="date"
-              name="DOB"
-              value={formData.DOB}
-              max={150}
-              onChange={(e) => formDataHandler(e)}
-            />
-          </fieldset>
+
           <fieldset className="Fieldset">
             <label className="Label" htmlFor="weight">
               Weight
@@ -185,29 +139,6 @@ const UserModal = ({ state, setState }) => {
               <div style={style}>{error.height}</div>
             </fieldset>
           )}
-          <fieldset className="Fieldset">
-            <label className="Label" htmlFor="gender">
-              Gender
-            </label>
-            <select
-              className="Input"
-              name="gender"
-              defaultValue={formData.gender}
-              onChange={(e) => formDataHandler(e)}
-              style={{ backgroundColor: "rgb(31,33,37)" }}
-            >
-              <option value="male">male</option>
-              <option value="female">female</option>
-            </select>
-          </fieldset>
-          {error.gender && (
-            <fieldset className="Fieldset">
-              <label className="Label" htmlFor="confirmPassword">
-                Error
-              </label>
-              <div style={style}>{error.gender}</div>
-            </fieldset>
-          )}
           <div
             style={{
               display: "flex",
@@ -219,15 +150,10 @@ const UserModal = ({ state, setState }) => {
               Update
             </button>
           </div>
-          <Dialog.Close asChild>
-            <Link className="IconButton" to={"/user"}>
-              <RxCross2 />
-            </Link>
-          </Dialog.Close>
         </Dialog.Content>
       </Dialog.Portal>
     </Dialog.Root>
   );
 };
 
-export default UserModal;
+export default TodayUpdateModal;

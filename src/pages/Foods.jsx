@@ -21,7 +21,7 @@ const Foods = () => {
   useEffect(() => {
     if (!user.log) {
       toast.info("Please log-in");
-      navigate("/user");
+      navigate("/");
     }
   }, []);
   const handleClick = () => {

@@ -1,12 +1,8 @@
 import { protectedInstance, instance } from "./instance";
 
 const userServices = {
-  register: async (userName, email, password) => {
-    return await instance.post(`/users`, {
-      userName,
-      email,
-      password,
-    });
+  register: async (data) => {
+    return await instance.post(`/users`, { ...data });
   },
   Activate: async (key) => {
     return await instance.put(`/users/activate/${key}`);
@@ -46,6 +42,11 @@ const userServices = {
   },
   update: async (data) => {
     return await protectedInstance.put(`/users/update`, {
+      ...data,
+    });
+  },
+  todayUpdate: async (data) => {
+    return await protectedInstance.put(`/users/update/today`, {
       ...data,
     });
   },
