@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const baseURL = "http://127.0.0.1:4444"||"https://fitness-tracker-be-s2gj.onrender.com/";
+const baseURL = "https://fitness-tracker-be-s2gj.onrender.com"||"https://fitness-tracker-be-s2gj.onrender.com/";
 
 const instance = axios.create({
   baseURL,
