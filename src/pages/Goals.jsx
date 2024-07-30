@@ -33,7 +33,7 @@ const Goals = () => {
       <div className="goals__container">
         <div className="goals__container">
           <h1>Goals</h1>
-          {goalLoading.adding && <PlaceholderCard />}
+          {goalLoading.adding && <PlaceholderCard />}          
           {goals.map((goal) => (
             <GoalCard key={goal._id} goal={goal} />
           ))}

@@ -69,8 +69,16 @@ input {
   box-shadow: 0 0 0 2px black;
 }
 .Button.green {
-  background-color: var(--primary-color);
-  color: var(--green-11);
+  display: inline-block;
+  color: brown;
+  background-color: rgb(35, 51, 46);
+}
+.Button.green1 {
+  position: relative;
+  display: inline-block;
+  color: brown;
+  left: 2rem;
+  background-color: rgb(35, 51, 46);
 }
 .Button.green:hover {
   background-color: var(--secondary-text-color);

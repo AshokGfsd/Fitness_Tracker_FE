@@ -60,7 +60,7 @@ const SignModal = () => {
     userName: "",
     email: "",
     gender: "male",
-    DOB: "2000-01-01",
+    DOB: "2000-12-01",
     password: "",
     confirmPassword: "",
   });
@@ -100,7 +100,7 @@ const SignModal = () => {
         toast.success(message);
         setTimeout(() => {
           navigate("/login");
-        }, 3000);
+        }, 1000);
       })
       .catch((e) => {
         console.log(e);
@@ -119,7 +119,7 @@ const SignModal = () => {
   };
 
   return (
-    <Dialog.Root open={true}>
+    <Dialog.Root open={true} >
       <Dialog.Trigger>Sign in</Dialog.Trigger>
       <Dialog.Portal>
         <Dialog.Overlay className="DialogOverlay" />

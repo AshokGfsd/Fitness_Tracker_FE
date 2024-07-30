@@ -25,3 +25,6 @@
 .exercises button:hover {
   background-color: var(--secondary-text-color);
 }
+.dd{
+  color: rgba(199, 14, 14, 0.945);
+}

@@ -4,6 +4,9 @@ const exerciseServices = {
   get: async () => {
     return await protectedInstance.get(`/exercises`);
   },
+  getToday: async () => {
+    return await protectedInstance.get(`/exercises/today`);
+  },
   post: async (data) => {
     return await protectedInstance.post(`/exercises`, {
       ...data,

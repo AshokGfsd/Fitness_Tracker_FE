@@ -87,8 +87,8 @@ const TodayUpdateModal = ({ state, setState }) => {
 
   return (
     <Dialog.Root open={state} onOpenChange={setState}>
-      <Dialog.Trigger className="Button green">
-        Form
+      <Dialog.Trigger className="Button green1">
+       Today update Form
         <RxReader />
       </Dialog.Trigger>
       <Dialog.Portal>

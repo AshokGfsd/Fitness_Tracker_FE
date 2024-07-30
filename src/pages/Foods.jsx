@@ -11,7 +11,7 @@ import { useNavigate } from "react-router-dom";
 
 const Foods = () => {
   const user = useSelector(selectUser);
-  const foods = user.foods;
+  const foods = user.todayFoods;
   const loading = user.loading;
   const foodLoading = user.foodLoading;
   const [state, setState] = useState(false);
@@ -34,6 +34,7 @@ const Foods = () => {
         <div className="foods__container">
           <h1>Foods</h1>
           {foodLoading.adding && <PlaceholderCard />}
+          {foods.length == 0 && <h3>PLEASE ADD TODAY FOODS</h3>}
           {foods.map((food) => (
             <FoodCard key={food._id} {...food} />
           ))}

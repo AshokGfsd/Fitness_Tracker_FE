@@ -36,6 +36,14 @@ h3 {
   transition: opacity 0.4s ease;
   animation: flash 2s linear infinite;
 }
+.dashboard__chart[data-loading="true"] {
+  background: linear-gradient(90deg, #1f21258f, #1f2125, #1f21258f);
+  background-size: 200% 100%;
+  background-position: 100%;
+  opacity: 0.7;
+  transition: opacity 0.4s ease;
+  animation: flash 2s linear infinite;
+}
 @keyframes flash {
   0% {
     background-position: 100%;

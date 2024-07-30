@@ -50,6 +50,11 @@ const userServices = {
       ...data,
     });
   },
+  todayCalUpdate: async (data) => { 
+    return await protectedInstance.put(`/users/update/calories`, {
+      ...data,
+    });
+  },
 };
 
 export default userServices;

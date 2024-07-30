@@ -4,6 +4,21 @@ import goalServices from "./goalServices";
 import suggestionServices from "./suggestionServices";
 import userServices from "./userServices";
 
+export const fetchTodayExercises = async (dispatch, userActions) => {
+  try {
+    dispatch(userActions({ type: "FETCH_DATA_LOADING" }));
+    const { data } = await exerciseServices.getToday();
+    dispatch(
+      userActions({
+        type: "FETCH_TODAY_EXERCISES_SUCCESS",
+        payload: data.exercises,
+      })
+    );
+  } catch (error) {
+    console.error("Error while fetching exercises:", error);
+    dispatch(userActions({ type: "FETCH_TODAY_EXERCISES_FAILURE" }));
+  }
+};
 export const fetchExercises = async (dispatch, userActions) => {
   try {
     dispatch(userActions({ type: "FETCH_DATA_LOADING" }));
@@ -17,6 +32,18 @@ export const fetchExercises = async (dispatch, userActions) => {
   }
 };
 
+export const fetchTodayGoals = async (dispatch, userActions) => {
+  try {
+    dispatch(userActions({ type: "FETCH_DATA_LOADING" }));
+    const { data } = await goalServices.getToday();
+    dispatch(
+      userActions({ type: "FETCH_TODAY_GOALS_SUCCESS", payload: data.goals })
+    );
+  } catch (error) {
+    console.error("Error while fetching goals:", error);
+    dispatch(userActions({ type: "FETCH_TODAY_GOALS_FAILURE" }));
+  }
+};
 export const fetchGoals = async (dispatch, userActions) => {
   try {
     dispatch(userActions({ type: "FETCH_DATA_LOADING" }));
@@ -35,6 +62,18 @@ export const fetchFoods = async (dispatch, userActions) => {
   } catch (error) {
     console.error("Error while fetching foods:", error);
     dispatch(userActions({ type: "FETCH_FOODS_FAILURE" }));
+  }
+};
+export const fetchTodayFoods = async (dispatch, userActions) => {
+  try {
+    dispatch(userActions({ type: "FETCH_DATA_LOADING" }));
+    const { data } = await foodServices.getToday();
+    dispatch(
+      userActions({ type: "FETCH_TODAY_FOODS_SUCCESS", payload: data.foods })
+    );
+  } catch (error) {
+    console.error("Error while fetching foods:", error);
+    dispatch(userActions({ type: "FETCH_TODAY_FOODS_FAILURE" }));
   }
 };
 export const profile = async (dispatch, userActions) => {

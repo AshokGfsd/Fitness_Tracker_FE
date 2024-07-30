@@ -48,13 +48,13 @@ const UserModal = ({ state, setState }) => {
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    const { userName, DOB, gender, weight, height } = user;
+    const { userName, DOB, gender } = user;
     setFormData({
       userName,
       DOB,
       gender,
-      weight,
-      height,
+      height: user.height[user.height.length - 1].value,
+      weight: user.weight[user.weight.length - 1].value,
     });
   }, [user]);
   const style = {

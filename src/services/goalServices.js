@@ -4,6 +4,9 @@ const goalServices = {
   get: async () => {
     return await protectedInstance.get(`/goals`);
   },
+  getToday: async () => {
+    return await protectedInstance.get(`/goals/today`);
+  },
   post: async ({
     _id,
     goalName,

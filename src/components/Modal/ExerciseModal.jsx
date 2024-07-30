@@ -17,7 +17,7 @@ const ExerciseModal = ({ state, setState, data }) => {
   });
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const { exercises } = user;
+  const { todayExercises: exercises } = user;
 
   useEffect(() => {
     if (data) {

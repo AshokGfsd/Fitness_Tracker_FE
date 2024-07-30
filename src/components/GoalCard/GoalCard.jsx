@@ -16,7 +16,7 @@ export const GoalCard = ({ goal, state: sugg }) => {
   const [state, setState] = useState(false);
   const goalLoading = user.goalLoading;
   const suggestions = user.suggestions;
-  const goals = user.goals;
+  const goals = user.todayGoals;
   const data = {
     ...goal,
   };
@@ -62,14 +62,14 @@ export const GoalCard = ({ goal, state: sugg }) => {
         });
     } else {
       setCurrentId(goal._id);
-      dispatch(userActions({ type: "DELETE_SUGGESTION_LOADING" }));
+      dispatch(userActions({ type: "DELETE_GOAL_LOADING" }));
       const final = suggestions.goals.filter((data) => data._id !== goal._id);
       suggestionServices
         .deleteByUser(goal._id)
         .then((response) => {
           dispatch(
             userActions({
-              type: "DELETE_SUGGESTION_SUCCESS",
+              type: "DELETE_GOAL_SUCCESS",
               payload: { ...suggestions, goals: final },
             })
           );

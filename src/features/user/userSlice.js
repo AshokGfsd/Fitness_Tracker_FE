@@ -1,11 +1,32 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export const initialState = {
-  profile: [],
+  profile: {
+    BMI: [],
+    DOB: null,
+    age: null,
+    calories: [
+      {
+        totalCaloriesBurned: 0,
+        totalCaloriesConsumed: 0,
+        totalCaloriesGoal: 0,
+        remainingCaloriestoGoal: 0,
+      },
+    ],
+    email: "",
+    gender: "",
+    height: [],
+    suggestions: [],
+    userName: "",
+    weight: [],
+  },
   log: false,
   exercises: [],
   foods: [],
   goals: [],
+  todayExercises: [],
+  todayFoods: [],
+  todayGoals: [],
   suggestions: { exercises: [], foods: [], goals: [] },
   yourSuggestions: { exercises: [], foods: [], goals: [] },
   loading: false,
@@ -87,6 +108,45 @@ export const userSlice = createSlice({
             error: null,
           };
         case "FETCH_GOALS_FAILURE":
+          return {
+            ...state,
+            loading: false,
+            error: "Error while fetching goals",
+          };
+        case "FETCH_TODAY_EXERCISES_SUCCESS":
+          return {
+            ...state,
+            todayExercises: action.payload.payload,
+            loading: false,
+            error: null,
+          };
+        case "FETCH_TODAY_EXERCISES_FAILURE":
+          return {
+            ...state,
+            loading: false,
+            error: "Error while fetching exercises",
+          };
+        case "FETCH_TODAY_FOODS_SUCCESS":
+          return {
+            ...state,
+            todayFoods: action.payload.payload,
+            loading: false,
+            error: null,
+          };
+        case "FETCH_TODAY_FOODS_FAILURE":
+          return {
+            ...state,
+            loading: false,
+            error: "Error while fetching foods",
+          };
+        case "FETCH_TODAY_GOALS_SUCCESS":
+          return {
+            ...state,
+            todayGoals: action.payload.payload,
+            loading: false,
+            error: null,
+          };
+        case "FETCH_TODAY_GOALS_FAILURE":
           return {
             ...state,
             loading: false,
@@ -260,7 +320,7 @@ export const userSlice = createSlice({
         case "ADD_EXERCISE_SUCCESS":
           return {
             ...state,
-            exercises: [action.payload.payload, ...state.exercises],
+            todayExercises: [action.payload.payload, ...state.todayExercises],
             exerciseLoading: {
               adding: false,
               deleting: false,
@@ -270,7 +330,7 @@ export const userSlice = createSlice({
         case "ADD_FOOD_SUCCESS":
           return {
             ...state,
-            foods: [action.payload.payload, ...state.foods],
+            todayFoods: [action.payload.payload, ...state.todayFoods],
             foodLoading: {
               adding: false,
               deleting: false,
@@ -280,7 +340,7 @@ export const userSlice = createSlice({
         case "ADD_GOAL_SUCCESS":
           return {
             ...state,
-            goals: [action.payload.payload, ...state.goals],
+            todayGoals: [action.payload.payload, ...state.todayGoals],
             goalLoading: {
               adding: false,
               deleting: false,
@@ -299,17 +359,17 @@ export const userSlice = createSlice({
         case "UPDATE_EXERCISE_SUCCESS":
           return {
             ...state,
+            todayExercises: action.payload.payload,
             exerciseLoading: {
               adding: false,
               deleting: false,
             },
-            exercises: action.payload.payload,
             error: null,
           };
         case "UPDATE_FOOD_SUCCESS":
           return {
             ...state,
-            foods: action.payload.payload,
+            todayFoods: action.payload.payload,
             foodLoading: {
               adding: false,
               deleting: false,
@@ -319,7 +379,7 @@ export const userSlice = createSlice({
         case "UPDATE_GOAL_SUCCESS":
           return {
             ...state,
-            goals: action.payload.payload,
+            todayGoals: action.payload.payload,
             goalLoading: {
               adding: false,
               deleting: false,
@@ -329,7 +389,7 @@ export const userSlice = createSlice({
         case "DELETE_EXERCISE_SUCCESS":
           return {
             ...state,
-            exercises: action.payload.payload,
+            todayExercises: action.payload.payload,
             exerciseLoading: {
               adding: false,
               deleting: false,
@@ -339,7 +399,7 @@ export const userSlice = createSlice({
         case "DELETE_FOOD_SUCCESS":
           return {
             ...state,
-            foods: action.payload.payload,
+            todayFoods: action.payload.payload,
             foodLoading: {
               adding: false,
               deleting: false,
@@ -349,7 +409,7 @@ export const userSlice = createSlice({
         case "DELETE_GOAL_SUCCESS":
           return {
             ...state,
-            goals: action.payload.payload,
+            todayGoals: action.payload.payload,
             goalLoading: {
               adding: false,
               deleting: false,
@@ -363,11 +423,32 @@ export const userSlice = createSlice({
           };
         case "LOGOUT_SUCCESS":
           return {
-            profile: [],
+            profile: {
+              BMI: [],
+              DOB: null,
+              age: null,
+              calories: [
+                {
+                  totalCaloriesBurned: 0,
+                  totalCaloriesConsumed: 0,
+                  totalCaloriesGoal: 0,
+                  remainingCaloriestoGoal: 0,
+                },
+              ],
+              email: "",
+              gender: "",
+              height: [],
+              suggestions: [],
+              userName: "",
+              weight: [],
+            },
             log: false,
             exercises: [],
             foods: [],
             goals: [],
+            todayExercises: [],
+            todayFoods: [],
+            todayGoals: [],
             suggestions: { exercises: [], foods: [], goals: [] },
             yourSuggestions: { exercises: [], foods: [], goals: [] },
             loading: false,

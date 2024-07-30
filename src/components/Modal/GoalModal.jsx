@@ -8,21 +8,28 @@ import { selectUser, userActions } from "../../features/user/userSlice";
 import { toast } from "react-toastify";
 
 const GoalModal = ({ state, setState, data }) => {
+  const today = new Date();
+  let mm = today.getMonth() + 1;
+  let dd = today.getDate() ;
+  if (dd < 10) dd = "0" + dd;
+  if (mm < 10) mm = "0" + mm;
+  const year = today.getFullYear();
   const [formData, setFormData] = useState({
     goalName: "New Goal",
     goalDescription: "New Goal",
-    targetDate: new Date(),
-    targetCaloriesValue: null,
+    targetDate: `${year}-${mm}-${dd}`,
+    targetCaloriesValue: "",
     status: "In Progress",
   });
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const goals = user.goals;
+  const goals = user.todayGoals;
 
   useEffect(() => {
     if (data) {
       const { _id, goalDescription, goalName, status, targetCaloriesValue } =
         data;
+
       setFormData({
         ...formData,
         _id,
@@ -57,14 +64,7 @@ const GoalModal = ({ state, setState, data }) => {
           );
           const { message } = response.data;
           toast.dismiss();
-          toast.success(message);
-          return setFormData(() => ({
-            goalName: "New Goal",
-            goalDescription: "New Goal",
-            targetDate: null,
-            targetCaloriesValue: null,
-            status: "In Progress",
-          }));
+          toast.success(message);         
         })
         .catch((e) => {
           console.log(e);
@@ -78,14 +78,14 @@ const GoalModal = ({ state, setState, data }) => {
         .post(formData)
         .then((response) => {
           if (data) {
-            dispatch(userActions({ type: "DELETE_SUGGESTION_LOADING" }));
+            dispatch(userActions({ type: "ADD_GOAL_LOADING" }));
             const suggestions = user.suggestions;
             const final = suggestions.goals.filter(
               (data) => data._id !== formData._id
             );
             dispatch(
               userActions({
-                type: "DELETE_SUGGESTION_SUCCESS",
+                type: "ADD_GOAL_SUCCESS",
                 payload: { ...suggestions, goals: final },
               })
             );
@@ -107,8 +107,8 @@ const GoalModal = ({ state, setState, data }) => {
           setFormData(() => ({
             goalName: "New Goal",
             goalDescription: "New Goal",
-            targetDate: null,
-            targetCaloriesValue: null,
+            targetDate: new Date(),
+            targetCaloriesValue: "",
             status: "In Progress",
           }));
         })

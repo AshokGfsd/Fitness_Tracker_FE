@@ -18,7 +18,7 @@ const FoodModal = ({ state, setState, data }) => {
   });
   const dispatch = useDispatch();
   const user = useSelector(selectUser);
-  const { foods } = user;
+  const { todayFoods:foods } = user;
 
   useEffect(() => {
     if (data) {

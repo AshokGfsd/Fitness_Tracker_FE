@@ -56,7 +56,6 @@ const User = () => {
       setAim(BMICheck(user.BMI[user.BMI.length - 1].value));
     }
   }, [log]);
-  console.log(user);
   return user.userName ? (
     <div className="">
       <h1>

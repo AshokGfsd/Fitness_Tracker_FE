@@ -12,7 +12,7 @@ import { toast } from "react-toastify";
 const Exercises = () => {
   const user = useSelector(selectUser);
   const [state, setState] = useState(false);
-  const exercises = user.exercises;
+  const exercises = user.todayExercises;
   const loading = user.loading;
   const exerciseLoading = user.exerciseLoading;
   const navigate = useNavigate();
@@ -32,8 +32,9 @@ const Exercises = () => {
       {loading && <h4>Loading...</h4>}
       <div className="exericise__container">
         <div className="exericise__container">
-          <h1>Exercises</h1>
+          <h1>Today Exercises</h1>
           {exerciseLoading.adding && <PlaceholderCard />}
+          {exercises.length==0&& <h3>PLEASE ADD TODAY Exercise</h3> }
           {exercises.map((exercise) => (
             <ExerciseCard key={exercise._id} {...exercise} />
           ))}
