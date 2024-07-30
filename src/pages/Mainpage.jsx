@@ -34,18 +34,23 @@ const Mainpage = () => {
   }, [user.profile]);
 
   useEffect(() => {
-    if (
-      user.log &&
-      new Date().getDate() !==
-        new Date(user.profile.BMI[user.profile.BMI.length - 1].date).getDate()
-    ) {
-      setState(true);
+    if (user.log) {
+      if (
+        user.profile.BMI.length == 0 ||
+        new Date().getDate() !==
+          new Date(user.profile.BMI[user.profile.BMI.length - 1].date).getDate()
+      ) {
+        setState(true);
+      }
     }
   }, [user.profile, state]);
   return (
     <Layout>
-      <TodayUpdateModal state={state} setState={setState} />
-      <Outlet />
+      {state ? (
+        <TodayUpdateModal state={state} setState={setState} />
+      ) : (
+        <Outlet />
+      )}
     </Layout>
   );
 };

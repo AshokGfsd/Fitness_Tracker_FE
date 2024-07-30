@@ -37,7 +37,7 @@ const TodayUpdateModal = ({ state, setState }) => {
   });
   const dispatch = useDispatch();
   useEffect(() => {
-    if (log) {
+    if (log && user.height.length != 0) {
       setFormData({
         height: user.height[user.height.length - 1].value,
         weight: user.weight[user.height.length - 1].value,
@@ -71,14 +71,14 @@ const TodayUpdateModal = ({ state, setState }) => {
     userServices
       .todayUpdate({ weight, height, BMI: +bmi })
       .then((response) => {
-        const message = response.data.message;        
+        const message = response.data.message;
         toast.dismiss();
         toast.success(message);
         setState(false);
         profile(dispatch, userActions);
       })
       .catch((e) => {
-        console.log(e)
+        console.log(e);
         const message = e.response.data.message;
         toast.dismiss();
         return toast.error(message);
@@ -95,7 +95,7 @@ const TodayUpdateModal = ({ state, setState }) => {
         <Dialog.Overlay className="DialogOverlay" />
         <Dialog.Content className="DialogContent">
           <Dialog.Title className="DialogTitle">
-            Enter Details for update
+            Enter Today Details for update
           </Dialog.Title>
           <Dialog.Description className="DialogDescription"></Dialog.Description>
 

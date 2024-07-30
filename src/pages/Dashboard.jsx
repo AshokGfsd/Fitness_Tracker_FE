@@ -34,7 +34,7 @@ const Dashboard = () => {
     return data;
   };
   useEffect(() => {
-    if (user.log) {
+    if (user.log && user.profile.BMI.length !== 0) {
       console.log(user.profile);
       const date = [];
       for (let i = 7; i > 0; i--) {
@@ -83,7 +83,6 @@ const Dashboard = () => {
           <h4>Total Calories Burned</h4>
           <img src="dashboardCardBg.svg" />
         </div>
-
         <div className="dashboard__card" data-loading={loading}>
           <p>
             <AiOutlineFire />
@@ -111,28 +110,56 @@ const Dashboard = () => {
           <img src="dashboardCardBg.svg" />
         </div>
       </div>
-      <LineChart
-        xAxis={[{ scaleType: "point", data: data.date }]}
-        series={[
-          {
-            data: data.bmi,
-            label: "BMI",
-            color: "red",
-          },
-          {
-            data: data.height,
-            label: "Height",
-            color: "blue",
-          },
-          {
-            data: data.weight,
-            label: "Weight",
-            color: "green",
-          },
-        ]}
-        width={500}
-        height={300}
-      />
+      <div className="dashboard_chart_container">
+        <div className="dashboard__chart" data-loading={loading}>
+          <LineChart
+            xAxis={[{ scaleType: "point", data: data.date }]}
+            yAxis={[
+              {
+                min: 0,
+                max: 100,
+                label: "BMI",
+                scaleType: "utc",
+              },
+
+//               scaleType?: 'band'
+// | 'linear'
+// | 'log'
+// | 'point'
+// | 'pow'
+// | 'sqrt'
+// | 'time'
+// | 'utc'
+            ]}
+            series={[
+              {
+                data: data.bmi,
+                label: "BMI",
+                color: "red",
+              },
+            ]}
+            height={300}
+          />
+        </div>
+        <div className="dashboard__chart" data-loading={loading}>
+          <LineChart
+            xAxis={[{ scaleType: "point", data: data.date }]}
+            series={[
+              {
+                data: data.height,
+                label: "Height",
+                color: "blue",
+              },
+              {
+                data: data.weight,
+                label: "Weight",
+                color: "green",
+              },
+            ]}
+            height={300}
+          />
+        </div>
+      </div>
     </div>
   );
 };

@@ -52,7 +52,7 @@ const User = () => {
     profile(dispatch, userActions);
   }, []);
   useEffect(() => {
-    if (log) {
+    if (log && user.BMI.length != 0) {
       setAim(BMICheck(user.BMI[user.BMI.length - 1].value));
     }
   }, [log]);
@@ -77,17 +77,23 @@ const User = () => {
         <tr>
           <td>Height</td>
           <td>:</td>
-          <td>{user.height[user.height.length - 1].value}</td>
+          <td>
+            {user.height.length != 0 &&
+              user.height[user.height.length - 1].value}
+          </td>
         </tr>
         <tr>
           <td>Weight</td>
           <td>:</td>
-          <td>{user.weight[user.weight.length - 1].value}</td>
+          <td>
+            {user.weight.length != 0 &&
+              user.weight[user.weight.length - 1].value}
+          </td>
         </tr>
         <tr>
           <td>BMI</td>
           <td>:</td>
-          <td>{user.BMI[user.BMI.length - 1].value}</td>
+          <td>{user.BMI.length != 0 && user.BMI[user.BMI.length - 1].value}</td>
         </tr>
         <tr>
           <td>STAGE</td>
